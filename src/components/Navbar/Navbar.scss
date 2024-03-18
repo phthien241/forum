@@ -1,0 +1,35 @@
+@import "./../../style/variable";
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: $primary-color;
+}
+.navbar--logo {
+  img {
+    height: auto;
+    width: 15rem;
+  }
+  margin: auto 0;
+}
+
+.navbar--account {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar--account-avatar {
+  img {
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+  }
+  margin-right: 0.5rem;
+}
+
+.navbar--account-name{
+    color: $text-on-primary;
+    height: fit-content;
+    margin: auto 0;
+}

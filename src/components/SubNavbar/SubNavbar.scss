@@ -1,0 +1,14 @@
+@import "./../../style/variable";
+
+.sub-navbar{
+    background-color: $secondary-color;
+    padding: .5rem 0;
+}
+.sub-navbar--nav{
+    text-align: center;
+    color: $text-on-secondary;    
+}
+.sub-navbar--nav-hot{
+    display: flex;
+    justify-content: space-evenly;
+}
