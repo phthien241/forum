@@ -1,5 +1,6 @@
 import React from "react";
 import "./Category.scss";
+import BreadScrumb from "../BreadScrumb/BreadScrumb";
 
 export interface subHeadingObject {
   subHeading: string;
@@ -16,6 +17,7 @@ const Category: React.FC<{ categories: CategoryProps[] }> = ({
 }) => {
   return (
     <>
+    {/* <BreadScrumb/> */}
       {categories.map((category, index) => {
         return (
           <div key={index} className="category">
