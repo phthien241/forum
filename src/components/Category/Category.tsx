@@ -1,6 +1,8 @@
 import React from "react";
 import "./Category.scss";
 import BreadScrumb from "../BreadScrumb/BreadScrumb";
+import { useNavigate } from "react-router-dom";
+import slugify from "slugify";
 
 export interface subHeadingObject {
   subHeading: string;
@@ -15,20 +17,28 @@ export interface CategoryProps {
 const Category: React.FC<{ categories: CategoryProps[] }> = ({
   categories,
 }) => {
+  const navigate = useNavigate();
+  const handleNavigate = (heading: string) => {
+    const path = slugify(heading, {
+      lower: true,
+      strict: true,
+      replacement: "-",
+    });
+    navigate(path);
+  };
   return (
     <>
-    {/* <BreadScrumb/> */}
       {categories.map((category, index) => {
         return (
           <div key={index} className="category">
-            <div className="category--heading">
-              {category.heading}
-            </div>
+            <div className="category--heading">{category.heading}</div>
             <div className="category--sub-heading">
               {category.subHeading.map((subHeading, index) => {
                 return (
                   <div key={index} className="category--sub-heading-list">
-                    <p>{subHeading.subHeading}</p>
+                    <p onClick={() => handleNavigate(subHeading.subHeading)}>
+                      {subHeading.subHeading}
+                    </p>
                     <hr />
                   </div>
                 );

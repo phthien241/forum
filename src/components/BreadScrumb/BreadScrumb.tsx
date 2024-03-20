@@ -45,8 +45,8 @@ const BreadScrumb: React.FC<BreadScrumbProps> = ({ navHeadings, headingForum }) 
                         >
                           <path
                             stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                             stroke-width="2"
                             d="m1 9 4-4-4-4"
                           />
@@ -87,7 +87,9 @@ const BreadScrumb: React.FC<BreadScrumbProps> = ({ navHeadings, headingForum }) 
           </ol>
         </nav>
       </div>
-      <div className="breadscrumb--heading"></div>
+      <div className="breadscrumb--heading">
+        {headingForum}
+      </div>
     </>
   );
 };

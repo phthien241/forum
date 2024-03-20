@@ -1,0 +1,31 @@
+.thread{
+    padding: 1rem 0.5rem;
+    display: grid;
+    grid-template-columns: 4fr 1fr 1fr;
+    gap: 1rem;
+}
+
+.thread--heading{
+    margin: auto 0;
+    p{
+        font-weight: 700;
+        color: #062089;
+        &:hover{
+            text-decoration: underline;
+            color: orange; 
+            cursor: pointer; 
+        }
+    }
+}
+
+.thread--stats{
+    margin: auto 0;
+    p{
+        font-size: 1.3rem;
+        color: rgba($color: gray, $alpha: .9);
+    }
+}
+
+.thread--time{
+    margin: auto 0;
+}
