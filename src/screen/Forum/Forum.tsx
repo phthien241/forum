@@ -3,6 +3,9 @@ import BreadScrumb from "../../components/BreadScrumb/BreadScrumb";
 import Navbar from "../../components/Navbar/Navbar";
 import ThreadTable from "../../components/ThreadTable/ThreadTable";
 import { ThreadProps } from "../../components/Thread/Thread";
+import { findParentHeading } from "../../constants/forumData";
+import deslugify from "../../utils/deslugify";
+import Pagination from "../../components/Pagination/Pagination";
 
 const Forum: React.FC = () => {
   const threads: ThreadProps[] = [
@@ -32,14 +35,17 @@ const Forum: React.FC = () => {
       date: new Date("2023-03-11"),
     },
   ];
-  const lastSegment = window.location.pathname.split("/").filter(Boolean).pop();
 
-  const headingForum = lastSegment!.charAt(0).toUpperCase() + lastSegment!.slice(1);
-  return (
+  const lastSegment = window.location.pathname.split("/").filter(Boolean).pop();
+  const currentPage = deslugify(lastSegment!);
+  const parentCurrentPage = findParentHeading(currentPage);
+
+    return (
     <div className="forum">
       <Navbar />
-      <BreadScrumb navHeadings={["haha", "hehe"]} headingForum={headingForum} />
+      <BreadScrumb navHeadings={[parentCurrentPage, currentPage]} headingForum={currentPage} />
       <ThreadTable threads={threads} />
+      <Pagination length={100} current={4} />
     </div>
   );
 };

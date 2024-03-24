@@ -5,6 +5,7 @@ import { Comment } from "../../models/comment";
 import avatar from "../../assets/avatar.jpg";
 import ThreadComment from "../../components/ThreadComment/ThreadComment";
 import Navbar from "../../components/Navbar/Navbar";
+import CommentBox from "../../components/CommentBox/CommentBox";
 
 const ThreadPage: React.FC = () => {
   const users: User[] = [
@@ -54,6 +55,7 @@ const ThreadPage: React.FC = () => {
         return (
           <div key={index}>
             <ThreadComment comment={comment} />
+            <CommentBox/>
           </div>
         );
       })}

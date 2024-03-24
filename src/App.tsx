@@ -13,8 +13,8 @@ function App() {
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path='/forum' element={<Forum />} />
-          <Route path="/thread" element={<ThreadPage />} />
+          <Route path='/forum/*' element={<Forum />} />
+          <Route path="/thread/*" element={<ThreadPage />} />
         </Routes>
       </Suspense>
     </Router>

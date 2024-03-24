@@ -3,7 +3,6 @@ import "./Home.scss";
 import Navbar from "../../components/Navbar/Navbar";
 import SubNavbar from "../../components/SubNavbar/SubNavbar";
 import Category, { CategoryProps } from "../../components/Category/Category";
-import Pagination from "../../components/Pagination/Pagination";
 import CommentBox from "../../components/CommentBox/CommentBox";
 import { useNavigate } from "react-router-dom";
 
@@ -46,7 +45,7 @@ export default function Home() {
       <SubNavbar />
       <div className="home--category">
       <Category categories={categories}/>
-      <Pagination length={100} current={4} />
+      
       <CommentBox/>
       </div>
       

@@ -18,13 +18,13 @@ const Category: React.FC<{ categories: CategoryProps[] }> = ({
   categories,
 }) => {
   const navigate = useNavigate();
-  const handleNavigate = (heading: string) => {
+  const handleNavigate = (heading: string,state:any) => {
     const path = slugify(heading, {
       lower: true,
       strict: true,
       replacement: "-",
     });
-    navigate(path);
+    navigate(`forum/${path}`,{state});
   };
   return (
     <>
@@ -36,7 +36,7 @@ const Category: React.FC<{ categories: CategoryProps[] }> = ({
               {category.subHeading.map((subHeading, index) => {
                 return (
                   <div key={index} className="category--sub-heading-list">
-                    <p onClick={() => handleNavigate(subHeading.subHeading)}>
+                    <p onClick={() => handleNavigate(subHeading.subHeading,{heading:category.heading,subHeading:subHeading.subHeading})}>
                       {subHeading.subHeading}
                     </p>
                     <hr />
