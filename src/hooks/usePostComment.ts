@@ -4,7 +4,7 @@ import { Comment } from '../models/comment';
 
 export const usePostComment = () => {
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState<Error | null>(null);
+    const [isError, setIsError] = useState<Error | null>(null);
     const [success, setSuccess] = useState(false);
     //   useEffect(()=>{
     //     const handlePostComment = async () => {
@@ -24,17 +24,17 @@ export const usePostComment = () => {
     //   },[])
     const handlePostComment = async (text: string, userId: string, threadId: string) => {
         setIsLoading(true);
-        setError(null);
+        setIsError(null);
         setSuccess(false);
         try {
             await postComment(text, userId, threadId);
             setSuccess(true);
         } catch (err) {
-            setError(err as Error);
+            setIsError(err as Error);
         } finally {
             setIsLoading(false);
         }
     };
 
-    return { handlePostComment, isLoading, error, success };
+    return { handlePostComment, isLoading, isError, success };
 };

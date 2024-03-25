@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./ThreadPage.scss";
-import { User } from "../../models/user";
-import { Comment } from "../../models/comment";
-import avatar from "../../assets/avatar.jpg";
 import ThreadComment from "../../components/ThreadComment/ThreadComment";
 import Navbar from "../../components/Navbar/Navbar";
 import CommentBox from "../../components/CommentBox/CommentBox";
@@ -11,17 +8,28 @@ import useGetThreadInfo from "../../hooks/useGetThreadInfo";
 import { Thread } from "../../models/thread";
 import BreadScrumb from "../../components/BreadScrumb/BreadScrumb";
 import { findParentHeading } from "../../constants/forumData";
+import { usePostComment } from "../../hooks/usePostComment";
 
 const ThreadPage: React.FC = () => {
   const { slug, threadId } = useParams();
-
+  const { handlePostComment, isLoading, isError, success } = usePostComment();
   const [thread, setThread] = useState<Thread | null>(null);
-  const { fetchedThread, loading, error } = useGetThreadInfo(threadId);
+  const { fetchedThread, loading, error, fetchThreadInfo } =
+    useGetThreadInfo(threadId);
   useEffect(() => {
     if (fetchedThread) {
       setThread(fetchedThread);
     }
   }, [fetchedThread]);
+
+  const onSubmitComment = (text: string, userId: string, threadId: string) => {
+    handlePostComment(text, userId, threadId);
+    if (success) {
+      fetchThreadInfo();
+    }
+  };
+
+
   return (
     <div className="thread-page">
       <Navbar />
@@ -46,7 +54,12 @@ const ThreadPage: React.FC = () => {
                 </div>
               </React.Fragment>
             ))}
-            <CommentBox userId="65fff7bd288bf9ccba240a04" threadId={thread._id} />
+            <CommentBox
+              userId="66017548e31c3443f9955e93"
+              threadId={thread._id}
+              isLoading={isLoading}
+              onSubmitComment={onSubmitComment}
+            />
           </div>
         </div>
       )}

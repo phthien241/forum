@@ -1,5 +1,6 @@
 import React from "react";
 import "./BreadScrumb.scss";
+import slugify from "slugify";
 
 interface BreadScrumbProps {
   navHeadings: string[];
@@ -7,6 +8,7 @@ interface BreadScrumbProps {
 }
 
 const BreadScrumb: React.FC<BreadScrumbProps> = ({ navHeadings, headingForum }) => {
+
   return (
     <>
       <div className="breadscrumb--nav">
@@ -14,7 +16,7 @@ const BreadScrumb: React.FC<BreadScrumbProps> = ({ navHeadings, headingForum }) 
           <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
             <li className="inline-flex items-center">
               <a
-                href="#"
+                href="/"
                 className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"
               >
                 <svg
@@ -67,8 +69,8 @@ const BreadScrumb: React.FC<BreadScrumbProps> = ({ navHeadings, headingForum }) 
                       >
                         <path
                           stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                            strokeLinejoin="round"
                           stroke-width="2"
                           d="m1 9 4-4-4-4"
                         />

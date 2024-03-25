@@ -1,12 +1,10 @@
+import axios from "axios";
 import { Thread } from "../models/thread";
 
-export const fetchAllThreads = async (): Promise<Thread[]> => {
+export const fetchAllThreads = async (currentCategory: string): Promise<Thread[]> => {
   try {
-    const response = await fetch('http://localhost:3001/api/thread');
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const threads: Thread[] = await response.json();
+    const response = await axios.get(`http://localhost:3001/api/thread/get-list-thread/${currentCategory}`);
+    const threads: Thread[] = await response.data;
     return threads;
   } catch (error) {
     console.error("Fetching all threads failed:", error);
@@ -17,11 +15,11 @@ export const fetchAllThreads = async (): Promise<Thread[]> => {
 
 export const fetchThread = async (id: string): Promise<Thread> => {
     try {
-      const response = await fetch(`http://localhost:3001/api/thread/${id}`);
-      if (!response.ok) {
+      const response = await axios.get(`http://localhost:3001/api/thread/get-thread-info/${id}`);
+      if (!response.data) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      const thread: Thread = await response.json();
+      const thread: Thread = await response.data;
       return thread;
     } catch (error) {
       console.error("Fetching thread failed:", error);

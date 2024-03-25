@@ -6,19 +6,20 @@ import { usePostComment } from "../../hooks/usePostComment";
 interface CommentBoxProps{
   userId: string;
   threadId: string;
+  isLoading: boolean;
+  onSubmitComment: (comment: string, userId: string, threadId: string) => void;
 }
 
-const CommentBox: React.FC<CommentBoxProps> = ({userId,threadId}) => {
+const CommentBox: React.FC<CommentBoxProps> = ({userId,threadId,isLoading,onSubmitComment }) => {
     const [comment,setComment] = useState('')
-    const {handlePostComment,isLoading, error, success} = usePostComment();
     const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setComment(e.target.value);
     }
     const handleSubmmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        handlePostComment(comment,userId,threadId);
-        setComment('');
+        onSubmitComment(comment, userId, threadId);
     }
+
+
   return (
     <div className="comment-box">
       <form className="mb-6" onSubmit={handleSubmmit}>
@@ -34,7 +35,7 @@ const CommentBox: React.FC<CommentBoxProps> = ({userId,threadId}) => {
                 required
                 value={comment}
                 onChange={handleTextChange}
-                disabled={isLoading}
+                // disabled={isLoading}
             ></textarea>
         </div>
         <button

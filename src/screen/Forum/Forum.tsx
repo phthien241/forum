@@ -11,11 +11,10 @@ import { transformThreadData } from "../../utils/transformThreadData";
 
 const Forum: React.FC = () => {
   const [threads, setThreads] = useState<ThreadProps[]>([]);
-  const { fetchedThreads, loading, error } = useGetThreads();
   const lastSegment = window.location.pathname.split("/").filter(Boolean).pop();
-
   const currentPage = deslugify(lastSegment!);
   const parentCurrentPage = findParentHeading(currentPage);
+  const { fetchedThreads, loading, error } = useGetThreads(currentPage);
   useEffect(() => {
     const transformedThread = fetchedThreads.map((thread) =>
       transformThreadData(thread)
@@ -39,7 +38,7 @@ const Forum: React.FC = () => {
         headingForum={currentPage}
       />
       <ThreadTable threads={threads} />
-      <Pagination length={100} current={4} />
+      <Pagination length={threads.length} current={4} />
     </div>
   );
 };
