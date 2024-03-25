@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 import "./CommentBox.scss";
+import {Comment} from "../../models/comment";
+import { usePostComment } from "../../hooks/usePostComment";
 
-const CommentBox: React.FC = () => {
+interface CommentBoxProps{
+  userId: string;
+  threadId: string;
+}
+
+const CommentBox: React.FC<CommentBoxProps> = ({userId,threadId}) => {
     const [comment,setComment] = useState('')
+    const {handlePostComment,isLoading, error, success} = usePostComment();
     const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setComment(e.target.value);
     }
     const handleSubmmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(comment);
+        handlePostComment(comment,userId,threadId);
         setComment('');
     }
   return (
@@ -26,6 +34,7 @@ const CommentBox: React.FC = () => {
                 required
                 value={comment}
                 onChange={handleTextChange}
+                disabled={isLoading}
             ></textarea>
         </div>
         <button

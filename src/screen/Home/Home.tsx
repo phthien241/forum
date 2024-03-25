@@ -45,7 +45,6 @@ export default function Home() {
       <SubNavbar />
       <div className="home--category">
       <Category categories={categories}/>
-      <CommentBox/>
       </div>
       
     </>

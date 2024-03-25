@@ -46,7 +46,7 @@ const ThreadPage: React.FC = () => {
                 </div>
               </React.Fragment>
             ))}
-            <CommentBox />
+            <CommentBox userId="65fff7bd288bf9ccba240a04" threadId={thread._id} />
           </div>
         </div>
       )}
