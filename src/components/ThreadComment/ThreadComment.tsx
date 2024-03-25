@@ -1,6 +1,5 @@
 import React from "react";
 import "./ThreadComment.scss";
-import { User } from "../../models/user";
 import { Comment } from "../../models/comment";
 
 interface ThreadCommentProps {
@@ -21,7 +20,7 @@ const ThreadComment: React.FC<ThreadCommentProps> = ({ comment }) => {
         </div>
         <div className="thread-comment--content">
           <div className="thread-comment--content-time">
-            <p>{comment.date.toLocaleDateString()}</p>
+          <p>{new Date(comment.createdAt).toLocaleDateString()}</p>
           </div>
           <hr />
           <div className="thread-comment--content-text">

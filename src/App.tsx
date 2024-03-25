@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path='/forum/*' element={<Forum />} />
-          <Route path="/thread/*" element={<ThreadPage />} />
+          <Route path="/thread/:slug/:threadId" element={<ThreadPage />} />
         </Routes>
       </Suspense>
     </Router>

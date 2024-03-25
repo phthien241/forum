@@ -1,5 +1,5 @@
 import React from "react";
-import Thread from "../Thread/Thread";
+import ThreadComponent from "../Thread/Thread";
 import { ThreadProps } from "../Thread/Thread";
 
 interface ThreadTableProps {
@@ -12,8 +12,9 @@ const ThreadTable: React.FC<ThreadTableProps> = ({ threads }) => {
       {threads.map((thread, index) => {
         return (
           <>
-            <Thread
+            <ThreadComponent
               key={index}
+              id={thread.id}
               heading={thread.heading}
               reply={thread.reply}
               date={thread.date}

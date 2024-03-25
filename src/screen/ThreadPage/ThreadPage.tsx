@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./ThreadPage.scss";
 import { User } from "../../models/user";
 import { Comment } from "../../models/comment";
@@ -6,60 +6,50 @@ import avatar from "../../assets/avatar.jpg";
 import ThreadComment from "../../components/ThreadComment/ThreadComment";
 import Navbar from "../../components/Navbar/Navbar";
 import CommentBox from "../../components/CommentBox/CommentBox";
+import { useParams } from "react-router-dom";
+import useGetThreadInfo from "../../hooks/useGetThreadInfo";
+import { Thread } from "../../models/thread";
+import BreadScrumb from "../../components/BreadScrumb/BreadScrumb";
+import { findParentHeading } from "../../constants/forumData";
 
 const ThreadPage: React.FC = () => {
-  const users: User[] = [
-    {
-      id: "user1",
-      name: "Alice",
-      avatar: avatar,
-    },
-    {
-      id: "user2",
-      name: "Bob",
-      avatar: avatar,
-    },
-    {
-      id: "user3",
-      name: "Charlie",
-      avatar: avatar,
-    },
-  ];
-  const comments: Comment[] = [
-    {
-      id: "comment1",
-      text: "This is a great post!",
-      user: users[0], // Alice
-      date: new Date("2024-03-20T12:00:00Z"),
-    },
-    {
-      id: "comment2",
-      text: "Thanks for sharing.",
-      user: users[1], // Bob
-      date: new Date("2024-03-20T13:00:00Z"),
-    },
-    {
-      id: "comment3",
-      text: "I have a question about this.",
-      user: users[2], // Charlie
-      date: new Date("2024-03-20T14:00:00Z"),
-    },
-  ];
+  const { slug, threadId } = useParams();
 
-  
-
+  const [thread, setThread] = useState<Thread | null>(null);
+  const { fetchedThread, loading, error } = useGetThreadInfo(threadId);
+  useEffect(() => {
+    if (fetchedThread) {
+      setThread(fetchedThread);
+    }
+  }, [fetchedThread]);
   return (
     <div className="thread-page">
-        <Navbar/>
-      {comments.map((comment, index) => {
-        return (
-          <div key={index}>
-            <ThreadComment comment={comment} />
-            <CommentBox/>
+      <Navbar />
+      {(error || !thread) && <div>Error loading thread:</div>}
+      {!error && !loading && thread && (
+        <div>
+          <div className="thread-page--head">
+            <BreadScrumb
+              navHeadings={[
+                findParentHeading(thread.category),
+                thread.category,
+                "Thread",
+              ]}
+              headingForum={thread.heading}
+            />
           </div>
-        );
-      })}
-
+          <div className="thread-page--body">
+            {thread.comments.map((comment, index) => (
+              <React.Fragment key={index}>
+                <div>
+                  <ThreadComment comment={comment} />
+                </div>
+              </React.Fragment>
+            ))}
+            <CommentBox />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

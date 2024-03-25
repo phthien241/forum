@@ -1,18 +1,26 @@
 import React from "react";
 import "./Thread.scss";
 import { useNavigate } from "react-router-dom";
+import slugify from "slugify";
 
 export interface ThreadProps {
+  id: string;
   heading: string;
   reply: number;
   date: Date;
 }
 
-const Thread: React.FC<ThreadProps> = ({ heading, reply, date }) => {
+const ThreadComponent: React.FC<ThreadProps> = ({
+  id,
+  heading,
+  reply,
+  date,
+
+}) => {
   const dateString = date.toLocaleDateString();
   const navigate = useNavigate();
   const handleNavigate = () => {
-    navigate(`/thread/${heading}`);
+    navigate(`/thread/${slugify(heading)}/${id}`);
   };
   return (
     <div className="thread">
@@ -20,11 +28,11 @@ const Thread: React.FC<ThreadProps> = ({ heading, reply, date }) => {
         <p onClick={() => handleNavigate()}>{heading}</p>
       </div>
       <div className="thread--stats">
-        <p>Replies: {reply}</p>
+        <p>Replies: {reply - 1}</p>
       </div>
       <div className="thread--time">{dateString}</div>
     </div>
   );
 };
 
-export default Thread;
+export default ThreadComponent;
