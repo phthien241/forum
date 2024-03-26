@@ -19,6 +19,8 @@ const Pagination: React.FC<PaginationProps> = ({ length, current }) => {
     setCurrentPage(page);
   };
 
+  const numberResultShowed = (currentPage == totalPages) ? length - 10*(totalPages-1) :  10;
+
   return (
     <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
       <div className="flex flex-1 justify-between sm:hidden">
@@ -44,9 +46,9 @@ const Pagination: React.FC<PaginationProps> = ({ length, current }) => {
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-gray-700">
-            Showing <span className="font-medium">1</span> to{" "}
-            <span className="font-medium">10</span> of{" "}
-            <span className="font-medium">97</span> results
+            Showing <span className="font-medium">{currentPage*10 -9 }</span> to{" "}
+            <span className="font-medium">{numberResultShowed*currentPage}</span> of{" "}
+            <span className="font-medium">{length}</span> results
           </p>
         </div>
         <div>

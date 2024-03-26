@@ -38,7 +38,7 @@ const Forum: React.FC = () => {
         headingForum={currentPage}
       />
       <ThreadTable threads={threads} />
-      <Pagination length={threads.length} current={4} />
+      <Pagination length={threads.length} current={1} />
     </div>
   );
 };
