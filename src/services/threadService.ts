@@ -1,9 +1,12 @@
 import axios from "axios";
 import { Thread } from "../models/thread";
+import { environment } from "../environment";
+
 
 export const fetchAllThreads = async (currentCategory: string): Promise<Thread[]> => {
   try {
-    const response = await axios.get(`http://localhost:3001/api/thread/get-list-thread/${currentCategory}`);
+    console.log(`${environment.apiURL}/api/thread/get-list-thread/${currentCategory}`)
+    const response = await axios.get(`${environment.apiURL}/api/thread/get-list-thread/${currentCategory}`);
     const threads: Thread[] = await response.data;
     return threads;
   } catch (error) {
@@ -15,7 +18,7 @@ export const fetchAllThreads = async (currentCategory: string): Promise<Thread[]
 
 export const fetchThread = async (id: string): Promise<Thread> => {
     try {
-      const response = await axios.get(`http://localhost:3001/api/thread/get-thread-info/${id}`);
+      const response = await axios.get(`${environment.apiURL}/api/thread/get-thread-info/${id}`);
       if (!response.data) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
