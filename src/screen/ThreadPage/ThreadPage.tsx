@@ -32,7 +32,6 @@ const ThreadPage: React.FC = () => {
 
   return (
     <div className="thread-page">
-      <Navbar />
       {(error || !thread) && <div>Error loading thread:</div>}
       {!error && !loading && thread && (
         <div>

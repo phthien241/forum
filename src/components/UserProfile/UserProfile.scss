@@ -1,0 +1,20 @@
+@import '../../style/variable';
+.user-profile--account {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .user-profile--account-avatar {
+    img {
+      border-radius: 50%;
+      width: 4rem;
+      height: 4rem;
+    }
+    margin-right: 0.5rem;
+  }
+  
+  .user-profile--account-name{
+      color: $text-on-primary;
+      height: fit-content;
+      margin: auto 0;
+  }

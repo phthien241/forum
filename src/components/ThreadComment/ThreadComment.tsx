@@ -15,7 +15,7 @@ const ThreadComment: React.FC<ThreadCommentProps> = ({ comment }) => {
             <img src={comment.user.avatar} alt="avatar" />
           </div>
           <div className="thread-comment--user-name">
-            <p>{comment.user.name}</p>
+            <p>{comment.user.username}</p>
           </div>
         </div>
         <div className="thread-comment--content">

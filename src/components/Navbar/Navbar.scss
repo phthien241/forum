@@ -15,22 +15,3 @@
   cursor: pointer;
 }
 
-.navbar--account {
-  display: flex;
-  justify-content: space-between;
-}
-
-.navbar--account-avatar {
-  img {
-    border-radius: 50%;
-    width: 4rem;
-    height: 4rem;
-  }
-  margin-right: 0.5rem;
-}
-
-.navbar--account-name{
-    color: $text-on-primary;
-    height: fit-content;
-    margin: auto 0;
-}

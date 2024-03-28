@@ -5,7 +5,9 @@ import SubNavbar from "../../components/SubNavbar/SubNavbar";
 import Category, { CategoryProps } from "../../components/Category/Category";
 import CommentBox from "../../components/CommentBox/CommentBox";
 import { useNavigate } from "react-router-dom";
-import Login from "../Login/Login";
+import { Authenticator } from "@aws-amplify/ui-react";
+
+
 
 export default function Home() {
 
@@ -42,10 +44,16 @@ export default function Home() {
 
   return (
     <>
-      <Navbar />
-      <SubNavbar />
       <div className="home--category">
       <Category categories={categories}/>
+      <Authenticator>
+        {({ signOut, user }) => (
+          <main>
+            <h1>Hello</h1>
+            <button onClick={signOut}>Sign out</button>
+          </main>
+        )}
+      </Authenticator>
       </div>
       
     </>

@@ -31,8 +31,6 @@ const Forum: React.FC = () => {
 
   return (
     <div className="forum">
-      
-      <Navbar />
       <BreadScrumb
         navHeadings={[parentCurrentPage, currentPage]}
         headingForum={currentPage}

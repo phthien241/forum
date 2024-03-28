@@ -1,5 +1,7 @@
 export interface User {
     id:string;
-    name: string;
+    username: string;
     avatar: string;
+    createdAt: Date;
+    userId: string;
 }

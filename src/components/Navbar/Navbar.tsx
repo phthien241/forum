@@ -1,28 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Navbar.scss";
 import logo from "../../assets/logo.png";
-import avatar from "../../assets/avatar.jpg";
 import { useNavigate } from "react-router-dom";
+import UserProfile from "../UserProfile/UserProfile";
+import { useAuthenticator } from "@aws-amplify/ui-react";
 
 const Navbar: React.FC = () => {
+  const { route } = useAuthenticator((context) => [context.route]);
   const navigate = useNavigate();
   const navigateHome = () => {
     navigate("/");
   };
+  const handleClick = () =>{
+    navigate("/login");
+  }
+
   return (
     <>
       <div className="navbar">
         <div className="navbar--logo" onClick={() => navigateHome()}>
           <img className="navbar--logo-image" src={logo} alt="logo" />
         </div>
-        <div className="navbar--account">
-          <div className="navbar--account-avatar">
-            <img src={avatar} alt="avatar" />
-          </div>
-          <div className="navbar--account-name">
-            <h3>Theo</h3>
-          </div>
-        </div>
+        {route === "authenticated" ? (
+          <UserProfile />
+        ) : (
+          <button onClick={handleClick} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Login
+          </button>
+        )}
       </div>
     </>
   );
