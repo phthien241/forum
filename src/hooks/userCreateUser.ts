@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { User } from '../models/user';
 import { createUser } from '../services/userService';
 
@@ -9,8 +9,7 @@ const useUserCreateUser = () => {
     const [isError, setIsError] = useState<Error | null>(null);
     const [success, setSuccess] = useState(false);
 
-    const handleCreateUser = async(user:User) =>{
-        console.log("he")
+    const handleCreateUser = useCallback(async (user: User) => {
         setIsLoading(true);
         setIsError(null);
         setSuccess(false);
@@ -23,7 +22,7 @@ const useUserCreateUser = () => {
             setSuccess(true);
             setIsLoading(false);
         }
-    }
+    }, []);
 
     return {handleCreateUser, isLoading, isError, success};
 };

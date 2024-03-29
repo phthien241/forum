@@ -9,13 +9,36 @@ import { Thread } from "../../models/thread";
 import BreadScrumb from "../../components/BreadScrumb/BreadScrumb";
 import { findParentHeading } from "../../constants/forumData";
 import { usePostComment } from "../../hooks/usePostComment";
+import { useAuthenticator } from "@aws-amplify/ui-react";
+import useGetUser from "../../hooks/userGetUser";
+import { User } from "../../models/user";
 
 const ThreadPage: React.FC = () => {
   const { slug, threadId } = useParams();
   const { handlePostComment, isLoading, isError, success } = usePostComment();
   const [thread, setThread] = useState<Thread | null>(null);
-  const { fetchedThread, loading, error, fetchThreadInfo } =
-    useGetThreadInfo(threadId);
+  const { fetchedThread, loading, error, fetchThreadInfo } = useGetThreadInfo(threadId);
+  
+  const { user } = useAuthenticator((context) => [context.user]);
+  const { route } = useAuthenticator((context) => [context.route]);
+  const { handleGetUser } = useGetUser();
+
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [currentUser, setCurrentUser] = useState<User>();
+
+  useEffect(() => {
+    if (user && isAuthenticated) {
+      handleGetUser(user.userId)
+        .then((fetchedUser) => {
+          setCurrentUser(fetchedUser);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    setIsAuthenticated(route === "authenticated");
+  }, [route, isAuthenticated]);
+  
   useEffect(() => {
     if (fetchedThread) {
       setThread(fetchedThread);
@@ -28,7 +51,6 @@ const ThreadPage: React.FC = () => {
       fetchThreadInfo();
     }
   };
-
 
   return (
     <div className="thread-page">
@@ -53,12 +75,14 @@ const ThreadPage: React.FC = () => {
                 </div>
               </React.Fragment>
             ))}
-            <CommentBox
-              userId="66017548e31c3443f9955e93"
-              threadId={thread._id}
-              isLoading={isLoading}
-              onSubmitComment={onSubmitComment}
-            />
+            {user && currentUser&& (
+              <CommentBox
+                userId={currentUser._id}
+                threadId={thread._id}
+                isLoading={isLoading}
+                onSubmitComment={onSubmitComment}
+              />
+            )}
           </div>
         </div>
       )}

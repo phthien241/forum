@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { postComment } from '../services/commentService';
 import { Comment } from '../models/comment';
 
@@ -6,7 +6,7 @@ export const usePostComment = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState<Error | null>(null);
     const [success, setSuccess] = useState(false);
-    const handlePostComment = async (text: string, userId: string, threadId: string) => {
+    const handlePostComment =useCallback( async (text: string, userId: string, threadId: string) => {
         setIsLoading(true);
         setIsError(null);
         setSuccess(false);
@@ -18,7 +18,8 @@ export const usePostComment = () => {
         } finally {
             setIsLoading(false);
         }
-    };
+    },[]);
+
 
     return { handlePostComment, isLoading, isError, success };
 };

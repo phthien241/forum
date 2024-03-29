@@ -1,10 +1,10 @@
 @import '../../style/variable';
-.user-profile--account {
+.user-profile {
     display: flex;
     justify-content: space-between;
   }
   
-  .user-profile--account-avatar {
+  .user-profile--avatar {
     img {
       border-radius: 50%;
       width: 4rem;
@@ -13,7 +13,7 @@
     margin-right: 0.5rem;
   }
   
-  .user-profile--account-name{
+  .user-profile--name{
       color: $text-on-primary;
       height: fit-content;
       margin: auto 0;

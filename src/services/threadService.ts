@@ -5,7 +5,6 @@ import { environment } from "../environment";
 
 export const fetchAllThreads = async (currentCategory: string): Promise<Thread[]> => {
   try {
-    console.log(`${environment.apiURL}/api/thread/get-list-thread/${currentCategory}`)
     const response = await axios.get(`${environment.apiURL}/api/thread/get-list-thread/${currentCategory}`);
     const threads: Thread[] = await response.data;
     return threads;

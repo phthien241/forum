@@ -7,6 +7,8 @@ import { useAuthenticator } from "@aws-amplify/ui-react";
 
 const Navbar: React.FC = () => {
   const { route } = useAuthenticator((context) => [context.route]);
+  const { user } = useAuthenticator((context) => [context.user]);
+  console.log(route);
   const navigate = useNavigate();
   const navigateHome = () => {
     navigate("/");
@@ -21,7 +23,7 @@ const Navbar: React.FC = () => {
         <div className="navbar--logo" onClick={() => navigateHome()}>
           <img className="navbar--logo-image" src={logo} alt="logo" />
         </div>
-        {route === "authenticated" ? (
+        {user ? (
           <UserProfile />
         ) : (
           <button onClick={handleClick} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
