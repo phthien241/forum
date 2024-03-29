@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import useGetUser from "../../hooks/userGetUser";
 import { User } from "../../models/user";
-import { fetchUser } from "../../services/userService";
 
 const UserProfile: React.FC = () => {
   const { user } = useAuthenticator((context) => [context.user]);

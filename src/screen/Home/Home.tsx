@@ -7,11 +7,12 @@ import CommentBox from "../../components/CommentBox/CommentBox";
 import { useNavigate } from "react-router-dom";
 import { Authenticator } from "@aws-amplify/ui-react";
 
-
-
 export default function Home() {
-
   const navigate = useNavigate();
+
+  const handleNavigate = (path: string) => {
+    navigate(path);
+  };
 
   const categories: CategoryProps[] = [
     {
@@ -35,7 +36,10 @@ export default function Home() {
       heading: "Education & Career",
       subHeading: [
         { subHeading: "Languages", path: "/languages" },
-        { subHeading: "Information Technology", path: "/information-technology" },
+        {
+          subHeading: "Information Technology",
+          path: "/information-technology",
+        },
         { subHeading: "Engineering", path: "/engineering" },
         { subHeading: "Economics & Finance", path: "/economics-finance" },
       ],
@@ -45,17 +49,22 @@ export default function Home() {
   return (
     <>
       <div className="home--category">
-      <Category categories={categories}/>
-      <Authenticator>
-        {({ signOut, user }) => (
-          <main>
-            <h1>Hello</h1>
-            <button onClick={signOut}>Sign out</button>
-          </main>
-        )}
-      </Authenticator>
+        <button
+          className="ml-8 mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={() => handleNavigate("/thread-form")}
+        >
+          Post Thread
+        </button>
+        <Category categories={categories} />
+        <Authenticator>
+          {({ signOut, user }) => (
+            <main>
+              <h1>Hello</h1>
+              <button onClick={signOut}>Sign out</button>
+            </main>
+          )}
+        </Authenticator>
       </div>
-      
     </>
   );
 }

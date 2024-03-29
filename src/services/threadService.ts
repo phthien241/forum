@@ -29,3 +29,14 @@ export const fetchThread = async (id: string): Promise<Thread> => {
     }
 }
 
+export const postThread = async (thread: Thread) => {
+  try {
+    console.log(thread);
+    const response = await axios.post(`${environment.apiURL}/api/thread/post-thread`, thread);
+    return response.data;
+  } catch (error) {
+    console.error("Posting thread failed:", error);
+    throw error;
+  }
+}
+
