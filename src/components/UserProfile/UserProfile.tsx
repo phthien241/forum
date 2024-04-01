@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import useGetUser from "../../hooks/userGetUser";
 import { User } from "../../models/user";
+import { signOut } from "aws-amplify/auth";
 
 const UserProfile: React.FC = () => {
-  const { user } = useAuthenticator((context) => [context.user]);
+  const { user,signOut } = useAuthenticator((context) => [context.user]);
   const { handleGetUser, isLoading, isError, success } = useGetUser();
 
   const [currentUser, setCurrentUser] = useState<User>();
@@ -32,6 +33,12 @@ const UserProfile: React.FC = () => {
           <div className="user-profile--name">
             <h3>{currentUser.username}</h3>
           </div>
+          <div>
+            
+          </div>
+          <button onClick={signOut} className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 rounded my-2 ml-2">
+            Logout
+          </button>
         </div>
       )}
     </>
